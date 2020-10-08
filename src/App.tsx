@@ -1,26 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import User from './User';
+import withLoading from './WithLoading';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  const fetchUser = () => {
+    return new Promise(resolve => 
+    setTimeout(() => {
+      return resolve({ name: 'John', age: 21 })
+    }, 3000));
+  }
+  const UserWithLoading = withLoading(User, fetchUser);
+
+  return <UserWithLoading />;
 }
 
 export default App;
